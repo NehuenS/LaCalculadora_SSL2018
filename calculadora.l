@@ -15,7 +15,7 @@
 "*"     {return '*';}
 "/"     {return '/';}
 "^"     {return '^';}
-"\n"    {return '\n';}
+"\n"    {return '\n';} // Comentario para primer comit
 
 %%
 
