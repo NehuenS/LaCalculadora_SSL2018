@@ -9,7 +9,7 @@
 %token NUM
 
 %left '+' '-'
-%left '*' '/' 
+%left '*' '/'
 %left '^'
 %left '(' ')'
 
@@ -27,8 +27,8 @@ exp:      NUM             { $$ = $1;         }
         | exp '+' exp     { $$ = $1 + $3;    }
         | exp '-' exp     { $$ = $1 - $3;    }
         | exp '*' exp     { $$ = $1 * $3;    }
-        | exp '/' exp     { if($3 == 0) yyerror("Division por 0") else $$ = $1 / $3; }
-        | exp '^' exp     { if($1 == 0 && $3 == 0) yyerror("0^0 es una indeterminacion") else $$ = pow ($1, $3); }
+        | exp '/' exp     { if($3 == 0) yyerror("Division por 0"); else $$ = $1 / $3; }
+        | exp '^' exp     { if($1 == 0 && $3 == 0) yyerror("0^0 es una indeterminacion"); else $$ = pow ($1, $3); }
 		| '-' exp		  { $$ = -$2;		 }
 		| '(' exp ')'     { $$ = $2;		 }
 ;

@@ -659,7 +659,7 @@ YY_RULE_SETUP
 case 9:
 YY_RULE_SETUP
 #line 18 "calculadora.l"
-{return '\n';}
+{return '\n';} // Comentario para primer comit
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
@@ -1545,11 +1545,13 @@ void *ptr;
 	free( ptr );
 	}
 
+#if YY_MAIN
 int main()
 	{
 	yylex();
 	return 0;
 	}
+#endif
 #line 20 "calculadora.l"
 
 
