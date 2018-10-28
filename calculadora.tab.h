@@ -52,8 +52,8 @@ typedef union YYSTYPE
 
 /* Line 1676 of yacc.c  */
 #line 17 "calculadora.y"
-
-  int ival;
+ /*Permite el uso de multiples tipos en yylval*/
+  int ival; 
   double val;
 
 

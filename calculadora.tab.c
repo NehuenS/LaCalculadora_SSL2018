@@ -116,8 +116,8 @@ typedef union YYSTYPE
 
 /* Line 214 of yacc.c  */
 #line 17 "calculadora.y"
-
-  int ival;
+ /*Permite el uso de multiples tipos en yylval*/
+  int ival; 
   double val;
 
 
@@ -1378,14 +1378,14 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 38 "calculadora.y"
-    { if((yyvsp[(3) - (3)].val) == 0) {yyerror("Division por 0");} else (yyval.val) = (yyvsp[(1) - (3)].val) / (yyvsp[(3) - (3)].val); 						   		 ;}
+    { if((yyvsp[(3) - (3)].val) == 0) {yyerror("Division por 0"); return 1;} else (yyval.val) = (yyvsp[(1) - (3)].val) / (yyvsp[(3) - (3)].val); 						   		 ;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 39 "calculadora.y"
-    { if((yyvsp[(1) - (3)].val) == 0 && (yyvsp[(3) - (3)].val) == 0) {yyerror("0^0 es una indeterminacion");} else (yyval.val) = pow ((yyvsp[(1) - (3)].val), (yyvsp[(3) - (3)].val)); ;}
+    { if((yyvsp[(1) - (3)].val) == 0 && (yyvsp[(3) - (3)].val) == 0) {yyerror("0^0 es una indeterminacion"); return 1;} else (yyval.val) = pow ((yyvsp[(1) - (3)].val), (yyvsp[(3) - (3)].val)); ;}
     break;
 
   case 13:
@@ -1617,7 +1617,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 45 "calculadora.y"
+#line 44 "calculadora.y"
 
 
 yyerror (char *s)  /* Llamada por yyparse ante un error */
@@ -1629,15 +1629,4 @@ void main(){
    printf("Ingrese una expresion aritmetica:\n");
    yyparse();
 }
-
-/*ent:      ENTERO          { $<ival>$ = $<ival>1;         		}
-		| exp			  { $<val>$ = $<ival>1;         		}
-        | ent '+' ent     { $<ival>$ = $<ival>1 + $<ival>3;     }
-        | ent '-' ent     { $<ival>$ = $<ival>1 - $<ival>3;     }
-        | ent '*' ent     { $<ival>$ = $<ival>1 * $<ival>3;     }
-        | ent '/' ent     { if($<ival>3 == 0) {yyerror("Division por 0");} else $<ival>$ = $<ival>1 / $<ival>3; 						   		  }
-        | ent '^' ent     { if($<ival>1 == 0 && $<ival>3 == 0) {yyerror("0^0 es una indeterminacion");} else $<ival>$ = pow ($<ival>1, $<ival>3); }
-		| '-' ent		  { $<ival>$ = -$<ival>2;		 		}
-		| '(' ent ')'     { $<ival>$ = $<ival>2;		 		}
-;*/
 

@@ -14,8 +14,8 @@
 %left '^'
 %left '(' ')'
 
-%union {
-  int ival;
+%union { /*Permite el uso de multiples tipos en yylval*/
+  int ival; 
   double val;
 }
 
@@ -35,12 +35,11 @@ exp:      NUM             { $<val>$ = $<val>1;         		}
         | exp '+' exp     { $<val>$ = $<val>1 + $<val>3;    }
         | exp '-' exp     { $<val>$ = $<val>1 - $<val>3;    }
         | exp '*' exp     { $<val>$ = $<val>1 * $<val>3;    }
-        | exp '/' exp     { if($<val>3 == 0) {yyerror("Division por 0");} else $<val>$ = $<val>1 / $<val>3; 						   		 }
-        | exp '^' exp     { if($<val>1 == 0 && $<val>3 == 0) {yyerror("0^0 es una indeterminacion");} else $<val>$ = pow ($<val>1, $<val>3); }
+        | exp '/' exp     { if($<val>3 == 0) {yyerror("Division por 0"); return 1;} else $<val>$ = $<val>1 / $<val>3; 						   		 }
+        | exp '^' exp     { if($<val>1 == 0 && $<val>3 == 0) {yyerror("0^0 es una indeterminacion"); return 1;} else $<val>$ = pow ($<val>1, $<val>3); }
 		| '-' exp		  { $<val>$ = -$<val>2;		 		}
 		| '(' exp ')'     { $<val>$ = $<val>2;		 		}
 ;
-
 
 %%
 
@@ -53,14 +52,3 @@ void main(){
    printf("Ingrese una expresion aritmetica:\n");
    yyparse();
 }
-
-/*ent:      ENTERO          { $<ival>$ = $<ival>1;         		}
-		| exp			  { $<val>$ = $<ival>1;         		}
-        | ent '+' ent     { $<ival>$ = $<ival>1 + $<ival>3;     }
-        | ent '-' ent     { $<ival>$ = $<ival>1 - $<ival>3;     }
-        | ent '*' ent     { $<ival>$ = $<ival>1 * $<ival>3;     }
-        | ent '/' ent     { if($<ival>3 == 0) {yyerror("Division por 0");} else $<ival>$ = $<ival>1 / $<ival>3; 						   		  }
-        | ent '^' ent     { if($<ival>1 == 0 && $<ival>3 == 0) {yyerror("0^0 es una indeterminacion");} else $<ival>$ = pow ($<ival>1, $<ival>3); }
-		| '-' ent		  { $<ival>$ = -$<ival>2;		 		}
-		| '(' ent ')'     { $<ival>$ = $<ival>2;		 		}
-;*/
